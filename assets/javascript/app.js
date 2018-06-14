@@ -1,6 +1,6 @@
 var topics = [
-    "black holes", "transhumanism", "technological singularity", "politics", "the matrix",
-    "space", "universal basic income", "commodore computers", "love"
+    "Black holes", "Transhumanism", "Technological Singularity", "Politics", "The Matrix",
+    "Space", "commodore 64"
 ];
 
 $(document).ready(function () {
@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     renderButtons();
 
-    $('#buttons-view').on('click', '.topic-button', function () {
+    $('.navbar-nav').on('click', '.topic-item', function () {
         var topic = $(this).attr('data-topic');
         var queryURL = host + searchPath + 'q=' + topic + '&limit=' + limit + '&api_key=' + apiKey;
         console.log('queryURL', queryURL)
@@ -54,23 +54,26 @@ $(document).ready(function () {
                 } //end else
             });// end $(".gif").on("click", function () {
         });// end .then(function(response) {
-    });// end buttons.on('click', '.topic-button', function(){
+    });// end buttons.on('click', '.topic-item', function(){
 
-    $("#add-topic").on("click", function (event) {
+    $(".btn").on("click", function (event) {
         event.preventDefault();
         var topic = $("#topic-input").val().trim();
         topics.push(topic);
         renderButtons();
-    });// end $("#add-topic").on("click", function (event) {
+    });// end $(".btn").on("click", function (event) {
 });// end $(document).ready(function() {
 
 function renderButtons() {
-    $("#buttons-view").empty();
+    $(".navbar-nav").empty();
     for (let index = 0; index < topics.length; index++) {
-        var topicButton = $('<button>');
-        topicButton.addClass('topic-button');
-        topicButton.attr('data-topic', topics[index]);
-        topicButton.text(topics[index]);
-        $('#buttons-view').append(topicButton);
+        var li = $('<li>');
+        li.addClass('nav-item');
+        var a = $('<a>');
+        a.addClass('nav-link');
+        a.addClass('topic-item');
+        a.attr('data-topic', topics[index]);
+        a.text(topics[index]);
+        $('.navbar-nav').append(a);
     }// end for (let index = 0; index < topics.length; index++){
 }// end function renderButtons() {
